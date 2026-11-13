@@ -6,6 +6,7 @@ This repository contains Python solutions for selected LeetCode-style problems. 
 
 - [image.py](image.py) — Rotates a square matrix by 90 degrees clockwise using in-place transpose + row reversal.
 - [jump.py](jump.py) — Determines whether you can reach the end of the array using the greedy "maximum reach" strategy.
+- [search.py](search.py) — Finds the correct insertion index using binary search.
 
 ## File Details
 
@@ -42,6 +43,37 @@ Why it works:
 Time complexity: O(n)
 Space complexity: O(1)
 
+### [search.py](search.py)
+
+Problem type: Binary search
+
+This solution returns the index where a target should be inserted into a sorted array.
+
+<details>
+<summary><strong>Hidden explanation (click to reveal)</strong></summary>
+
+This is a classic binary search problem. Instead of scanning the whole array, it keeps two pointers:
+
+- `left` starts at the beginning of the array.
+- `right` starts at the end of the array (represented as `len(nums)`).
+
+Then it repeatedly checks the middle element:
+
+- If `nums[mid] < target`, the target should be to the right, so `left = mid + 1`.
+- Otherwise, the target is at `mid` or to the left, so `right = mid`.
+
+The loop stops when `left == right`, which means the search space has collapsed to the exact insertion position.
+
+Why it works:
+- The array is sorted, so numbers smaller than the target are always on the left.
+- Numbers greater than or equal to the target are always on the right.
+- By halving the search range each time, the algorithm reaches the correct insertion point in logarithmic time.
+
+Time complexity: O(log n)
+Space complexity: O(1)
+
+</details>
+
 ## How to Use
 
 Open any file in this repository and run the solution with Python:
@@ -49,6 +81,7 @@ Open any file in this repository and run the solution with Python:
 ```bash
 python image.py
 python jump.py
+python search.py
 ```
 
 If you want, I can also turn this into a more polished README with a project banner, badges, and a table of contents.
