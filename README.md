@@ -7,6 +7,7 @@ This repository contains Python solutions for selected LeetCode-style problems. 
 - [image.py](image.py) — Rotates a square matrix by 90 degrees clockwise using in-place transpose + row reversal.
 - [jump.py](jump.py) — Determines whether you can reach the end of the array using the greedy "maximum reach" strategy.
 - [search.py](search.py) — Finds the correct insertion index using binary search.
+- [backtrack.py](backtrack.py) — Solves a Sudoku puzzle using backtracking.
 
 ## File Details
 
@@ -74,6 +75,34 @@ Space complexity: O(1)
 
 </details>
 
+### [backtrack.py](backtrack.py)
+
+Problem type: Backtracking / Sudoku
+
+This solution fills the empty cells in a 9×9 Sudoku board while following the Sudoku rules.
+
+<details>
+<summary><strong>Hidden explanation (click to reveal)</strong></summary>
+
+The solver first records the digits already present in each row, column, and 3×3 box using sets. These sets make it quick to check whether a digit is allowed in an empty cell.
+
+The recursive `backtrack` function searches for an empty cell, then tries digits from `1` to `9`:
+
+- If a digit is not already in that cell's row, column, or 3×3 box, the solver places it and records it in the corresponding sets.
+- It then recursively tries to solve the rest of the board.
+- If that choice eventually leads to a dead end, it removes the digit from the board and sets, then tries the next possibility. This undo step is called **backtracking**.
+- If no empty cells remain, the puzzle is solved.
+
+Why it works:
+- Every attempted placement follows the Sudoku constraints.
+- When a choice cannot lead to a solution, undoing it lets the solver explore another valid choice instead of getting stuck.
+
+Time complexity: Exponential in the worst case, because the solver may need to try multiple digits for many empty cells. The row, column, and box checks prune invalid choices along the way.
+
+Space complexity: O(1) auxiliary space for a fixed 9×9 board, apart from the recursion stack (up to 81 calls).
+
+</details>
+
 ## How to Use
 
 Open any file in this repository and run the solution with Python:
@@ -82,6 +111,7 @@ Open any file in this repository and run the solution with Python:
 python image.py
 python jump.py
 python search.py
+python backtrack.py
 ```
 
 If you want, I can also turn this into a more polished README with a project banner, badges, and a table of contents.
